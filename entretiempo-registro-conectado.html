@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registrate · Entretiempo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --cream:   #FAF6F0;
+  --cream2:  #F2EBE0;
+  --cream3:  #E8DDD0;
+  --sage:    #8A9E6A;
+  --sage-d:  #6B7D50;
+  --sage-l:  #C8D9B0;
+  --sage-xl: #EAF0E0;
+  --gold:    #C8922A;
+  --gold-l:  #F5E6C8;
+  --brown:   #3D2E1E;
+  --brown-m: #7A6248;
+  --brown-l: #B8A090;
+  --red:     #C0392B;
+  --red-l:   #FDECEA;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+h1,h2,h3 { font-family: 'Playfair Display', serif; font-weight: 400; line-height: 1.25; }
+
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+  background: rgba(250,246,240,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream3);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-size: 20px; color: var(--brown);
+  display: flex; align-items: center; gap: 3px;
+}
+.logo-dot { color: var(--gold); }
+.nav-back {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--brown-m); cursor: pointer;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--sage-d); }
+.nav-back svg { width: 16px; height: 16px; }
+
+/* ── LAYOUT ── */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  flex: 1;
+  min-height: calc(100vh - 64px);
+}
+
+/* ── LEFT PANEL ── */
+.left {
+  background: var(--cream2);
+  border-right: 1px solid var(--cream3);
+  padding: 4rem 5% 3rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: sticky; top: 64px; height: calc(100vh - 64px);
+  overflow: hidden;
+}
+.left-orb {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+.left-orb1 {
+  width: 350px; height: 350px; bottom: -80px; left: -80px;
+  background: radial-gradient(circle, var(--sage-xl), transparent 70%);
+}
+.left-orb2 {
+  width: 200px; height: 200px; top: 40px; right: -40px;
+  background: radial-gradient(circle, var(--gold-l), transparent 70%);
+}
+.left-content { position: relative; z-index: 1; }
+.left-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--sage-xl); border: 1px solid var(--sage-l);
+  border-radius: 30px; padding: 5px 14px;
+  font-size: 11px; color: var(--sage-d); letter-spacing: .08em;
+  text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.left-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+.left h2 { font-size: 2rem; color: var(--brown); margin-bottom: 1rem; }
+.left h2 em { color: var(--sage-d); font-style: italic; }
+.left-sub { font-size: 15px; color: var(--brown-m); line-height: 1.8; margin-bottom: 2.5rem; }
+.trust-items { display: flex; flex-direction: column; gap: 14px; }
+.trust-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--brown-m);
+}
+.trust-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--cream); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+  border: 1px solid var(--cream3);
+}
+.trust-icon svg { width: 18px; height: 18px; stroke: var(--sage-d); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.left-quote {
+  position: relative; z-index: 1;
+  background: var(--cream); border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--cream3);
+}
+.left-quote p { font-size: 13px; color: var(--brown-m); line-height: 1.7; font-style: italic; margin-bottom: .75rem; }
+.quote-who { font-size: 12px; color: var(--brown-l); font-weight: 500; }
+
+/* ── RIGHT PANEL (FORM) ── */
+.right {
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+}
+
+/* ── STEPPER ── */
+.stepper {
+  display: flex; align-items: center;
+  margin-bottom: 2.5rem; gap: 0;
+}
+.st-step { display: flex; align-items: center; }
+.st-circle {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500;
+  border: 1.5px solid var(--cream3);
+  background: var(--cream); color: var(--brown-l);
+  transition: all .3s; flex-shrink: 0;
+}
+.st-circle.active { border-color: var(--sage); color: var(--sage-d); background: var(--sage-xl); }
+.st-circle.done  { border-color: var(--sage); background: var(--sage); color: #fff; }
+.st-label {
+  font-size: 11px; color: var(--brown-l); margin-left: 6px;
+  white-space: nowrap; display: none;
+}
+.st-label.active { color: var(--sage-d); font-weight: 500; display: block; }
+.st-line { flex: 1; height: 1.5px; background: var(--cream3); margin: 0 8px; min-width: 20px; transition: background .3s; }
+.st-line.done { background: var(--sage-l); }
+
+/* ── STEP PANELS ── */
+.step-panel { display: none; }
+.step-panel.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+.step-header { margin-bottom: 2rem; }
+.step-num {
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--sage-d); margin-bottom: .5rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.step-num::before { content:''; width:16px; height:1px; background:var(--sage); }
+.step-header h3 { font-size: 1.5rem; color: var(--brown); margin-bottom: .4rem; }
+.step-header p { font-size: 14px; color: var(--brown-m); }
+
+/* ── FIELDS ── */
+.field { margin-bottom: 1.25rem; }
+.field label {
+  display: block; font-size: 13px; color: var(--brown-m);
+  margin-bottom: 6px; font-weight: 500;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--cream3);
+  border-radius: 12px; font-size: 14px;
+  background: var(--cream); color: var(--brown);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--sage-l);
+  box-shadow: 0 0 0 3px rgba(138,158,106,.12);
+}
+.field textarea { height: 90px; resize: vertical; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field-hint { font-size: 12px; color: var(--brown-l); margin-top: 4px; }
+.field-error { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+
+/* ── OPTION CARDS ── */
+.option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+.option-card {
+  border: 1.5px solid var(--cream3); border-radius: 14px;
+  padding: 1rem 1.25rem; cursor: pointer;
+  transition: all .2s; background: var(--cream);
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.option-card:hover { border-color: var(--sage-l); background: var(--sage-xl); }
+.option-card.selected { border-color: var(--sage); background: var(--sage-xl); }
+.option-card.selected .opt-check { border-color: var(--sage); background: var(--sage); }
+.opt-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--cream3); flex-shrink: 0;
+  margin-top: 2px; transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.opt-check svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; display: none; }
+.option-card.selected .opt-check svg { display: block; }
+.opt-text h4 { font-size: 14px; font-weight: 500; color: var(--brown); margin-bottom: 2px; font-family: 'DM Sans', sans-serif; }
+.opt-text p { font-size: 12px; color: var(--brown-m); line-height: 1.5; }
+
+/* MODALIDAD FULL WIDTH */
+.option-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* TAG CHIPS */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+.chip {
+  padding: 8px 16px; border: 1.5px solid var(--cream3);
+  border-radius: 30px; font-size: 13px; color: var(--brown-m);
+  cursor: pointer; transition: all .2s; background: var(--cream);
+}
+.chip:hover { border-color: var(--sage-l); color: var(--sage-d); }
+.chip.selected { background: var(--sage); color: #fff; border-color: var(--sage); }
+
+/* ── BUTTONS ── */
+.btn-row { display: flex; gap: 10px; justify-content: space-between; margin-top: 2rem; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; background: var(--sage); color: #fff;
+  border-radius: 30px; font-size: 14px; font-weight: 500;
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .25s;
+  box-shadow: 0 4px 16px rgba(138,158,106,.25);
+}
+.btn-primary:hover { background: var(--sage-d); transform: translateY(-1px); }
+.btn-primary svg { width: 16px; height: 16px; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 13px 20px; background: transparent;
+  border: 1.5px solid var(--cream3); border-radius: 30px;
+  font-size: 14px; color: var(--brown-m); cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: all .2s;
+}
+.btn-back:hover { border-color: var(--cream4); color: var(--brown); }
+.btn-primary:disabled { opacity: .5; cursor: default; transform: none; }
+
+/* ── PROGRESO ── */
+.progress-bar {
+  height: 3px; background: var(--cream3); border-radius: 2px;
+  margin-bottom: 2rem; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--sage), var(--gold));
+  border-radius: 2px; transition: width .4s ease;
+}
+
+/* ── CONFIRMACION ── */
+.confirm-wrap { text-align: center; padding: 1rem 0; }
+.confirm-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--sage-xl); border: 2px solid var(--sage-l);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem; font-size: 28px;
+}
+.confirm-icon svg { width: 32px; height: 32px; stroke: var(--sage-d); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.confirm-wrap h3 { font-size: 1.75rem; color: var(--brown); margin-bottom: .5rem; }
+.confirm-wrap p { font-size: 15px; color: var(--brown-m); line-height: 1.8; margin-bottom: 1.5rem; }
+.confirm-card {
+  background: var(--cream2); border-radius: 16px;
+  padding: 1.25rem 1.5rem; text-align: left; margin-bottom: 1.25rem;
+  border: 1px solid var(--cream3);
+}
+.confirm-row {
+  display: flex; justify-content: space-between;
+  font-size: 14px; padding: 7px 0;
+  border-bottom: 1px solid var(--cream3);
+}
+.confirm-row:last-child { border-bottom: none; }
+.confirm-row span:first-child { color: var(--brown-m); }
+.confirm-row span:last-child { color: var(--brown); font-weight: 500; }
+.confirm-next {
+  background: var(--sage-xl); border-radius: 12px;
+  padding: 1rem 1.25rem;
+  font-size: 13px; color: var(--sage-d); line-height: 1.7;
+  margin-bottom: 1.5rem; text-align: left;
+}
+.confirm-next strong { display: block; margin-bottom: 4px; }
+
+@media (max-width: 768px) {
+  .page { grid-template-columns: 1fr; }
+  .left { display: none; }
+  .right { padding: 2rem 1.25rem; }
+  .option-grid { grid-template-columns: 1fr; }
+  .option-grid-3 { grid-template-columns: 1fr 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="entretiempo-psi.html" class="nav-logo">
+    entre<span class="logo-dot">tiempo</span>
+  </a>
+  <a href="entretiempo-psi.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al inicio
+  </a>
+</nav>
+
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="left-orb left-orb1"></div>
+    <div class="left-orb left-orb2"></div>
+    <div class="left-content">
+      <div class="left-eyebrow"><span></span> Primer paso</div>
+      <h2>Empezá tu<br><em>proceso hoy</em></h2>
+      <p class="left-sub">Completá el formulario y en menos de 24 hs nuestro equipo te asigna el psicólogo ideal para vos.</p>
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          Psicólogos matriculados y seleccionados
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          Sesiones 100% confidenciales
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          Asignación en menos de 24 horas
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          Online o presencial, donde estés
+        </div>
+      </div>
+    </div>
+    <div class="left-quote">
+      <p>"Llevo más de un año y la experiencia fue excelente desde el principio. Se adaptaron a mis horarios y a mis necesidades."</p>
+      <div class="quote-who">Sol · Ann Arbor, Estados Unidos</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+
+    <!-- STEPPER -->
+    <div class="stepper">
+      <div class="st-step">
+        <div class="st-circle active" id="sc1">1</div>
+        <span class="st-label active" id="sl1">Tus datos</span>
+      </div>
+      <div class="st-line" id="line1"></div>
+      <div class="st-step">
+        <div class="st-circle" id="sc2">2</div>
+        <span class="st-label" id="sl2">Tu consulta</span>
+      </div>
+      <div class="st-line" id="line2"></div>
+      <div class="st-step">
+        <div class="st-circle" id="sc3">3</div>
+        <span class="st-label" id="sl3">Preferencias</span>
+      </div>
+      <div class="st-line" id="line3"></div>
+      <div class="st-step">
+        <div class="st-circle" id="sc4">4</div>
+        <span class="st-label" id="sl4">Listo</span>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress" style="width:25%"></div>
+    </div>
+
+    <!-- PASO 1: DATOS PERSONALES -->
+    <div class="step-panel active" id="p1">
+      <div class="step-header">
+        <div class="step-num">Paso 1 de 3</div>
+        <h3>Contanos sobre vos</h3>
+        <p>Tus datos son confidenciales y solo los usamos para asignarte el profesional ideal.</p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre *</label>
+          <input type="text" id="nombre" placeholder="Tu nombre" />
+        </div>
+        <div class="field">
+          <label>Apellido *</label>
+          <input type="text" id="apellido" placeholder="Tu apellido" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" id="email" placeholder="correo@ejemplo.com" />
+        <div class="field-hint">Te enviamos la confirmación aquí</div>
+      </div>
+      <div class="field">
+        <label>Teléfono / WhatsApp</label>
+        <input type="tel" id="tel" placeholder="+54 9 11 ..." />
+        <div class="field-hint">Para coordinación de sesiones</div>
+      </div>
+      <div class="field">
+        <label>País</label>
+        <select id="pais">
+          <option value="">Seleccioná tu país</option>
+          <option>Argentina</option>
+          <option>Uruguay</option>
+          <option>Chile</option>
+          <option>México</option>
+          <option>España</option>
+          <option>Estados Unidos</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>¿Cómo te enteraste de Entretiempo?</label>
+        <select>
+          <option value="">Seleccioná una opción</option>
+          <option>Instagram</option>
+          <option>Recomendación de alguien</option>
+          <option>Google</option>
+          <option>TikTok</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div style="border-top:1px solid var(--cream3);margin:1.5rem 0 1.25rem;"></div>
+      <div style="margin-bottom:1rem;">
+        <p style="font-size:14px;font-weight:500;color:var(--brown);margin-bottom:3px;">Contacto de referencia <span style="font-size:12px;font-weight:400;color:var(--brown-l);">— opcional</span></p>
+        <p style="font-size:13px;color:var(--brown-m);">Una persona de confianza a quien podamos contactar en caso de necesidad.</p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" id="ref-nombre" placeholder="Nombre de la persona" />
+        </div>
+        <div class="field">
+          <label>Vínculo</label>
+          <select id="ref-vinculo">
+            <option value="">Seleccioná</option>
+            <option>Pareja</option>
+            <option>Madre / Padre</option>
+            <option>Hermano/a</option>
+            <option>Amigo/a</option>
+            <option>Familiar</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Teléfono de referencia</label>
+        <input type="tel" id="ref-tel" placeholder="+54 9 11 ..." />
+        <div class="field-hint">Solo se contacta en situaciones de emergencia</div>
+      </div>
+      <div class="btn-row" style="justify-content:flex-end;">
+        <button class="btn-primary" onclick="goStep(2)">
+          Siguiente
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 2: MOTIVO DE CONSULTA -->
+    <div class="step-panel" id="p2">
+      <div class="step-header">
+        <div class="step-num">Paso 2 de 3</div>
+        <h3>¿Qué te trae a terapia?</h3>
+        <p>Podés elegir más de una opción. Esto nos ayuda a encontrar el profesional ideal para vos.</p>
+      </div>
+
+      <label style="font-size:13px;color:var(--brown-m);font-weight:500;display:block;margin-bottom:10px;">Áreas que querés trabajar</label>
+      <div class="chips" id="chips-motivo">
+        <span class="chip" onclick="toggleChip(this)">Ansiedad</span>
+        <span class="chip" onclick="toggleChip(this)">Depresión o tristeza</span>
+        <span class="chip" onclick="toggleChip(this)">Autoestima</span>
+        <span class="chip" onclick="toggleChip(this)">Estrés</span>
+        <span class="chip" onclick="toggleChip(this)">Relaciones de pareja</span>
+        <span class="chip" onclick="toggleChip(this)">Familia</span>
+        <span class="chip" onclick="toggleChip(this)">Duelo</span>
+        <span class="chip" onclick="toggleChip(this)">Miedos o fobias</span>
+        <span class="chip" onclick="toggleChip(this)">Trabajo y carrera</span>
+        <span class="chip" onclick="toggleChip(this)">Identidad</span>
+        <span class="chip" onclick="toggleChip(this)">Otro</span>
+      </div>
+
+      <div class="field" style="margin-top:.5rem;">
+        <label>Contanos un poco más (opcional)</label>
+        <textarea placeholder="Podés describirnos brevemente qué estás atravesando. Todo lo que escribas es confidencial."></textarea>
+      </div>
+
+      <div class="field">
+        <label>¿Es tu primera vez en terapia?</label>
+        <div class="option-grid">
+          <div class="option-card selected" onclick="selectOne(this, 'primera')">
+            <div class="opt-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="opt-text">
+              <h4>Sí, es mi primera vez</h4>
+              <p>Nunca hice terapia antes</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOne(this, 'primera')">
+            <div class="opt-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="opt-text">
+              <h4>Ya hice terapia antes</h4>
+              <p>Quiero retomar o cambiar de profesional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver
+        </button>
+        <button class="btn-primary" onclick="goStep(3)">
+          Siguiente
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 3: PREFERENCIAS -->
+    <div class="step-panel" id="p3">
+      <div class="step-header">
+        <div class="step-num">Paso 3 de 3</div>
+        <h3>Tus preferencias</h3>
+        <p>Para asignarte el profesional que mejor se adapte a vos.</p>
+      </div>
+
+      <div class="field">
+        <label>Modalidad de atención</label>
+        <div class="option-grid option-grid-3">
+          <div class="option-card selected" onclick="selectOne(this,'modal')" style="flex-direction:column;align-items:center;text-align:center;gap:6px;">
+            <div class="opt-check" style="margin:0 auto;"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div style="font-size:22px;margin-bottom:4px;">💻</div>
+              <h4>Online</h4>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOne(this,'modal')" style="flex-direction:column;align-items:center;text-align:center;gap:6px;">
+            <div class="opt-check" style="margin:0 auto;"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div style="font-size:22px;margin-bottom:4px;">🏢</div>
+              <h4>Presencial</h4>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOne(this,'modal')" style="flex-direction:column;align-items:center;text-align:center;gap:6px;">
+            <div class="opt-check" style="margin:0 auto;"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div style="font-size:22px;margin-bottom:4px;">🔄</div>
+              <h4>Sin preferencia</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Frecuencia deseada</label>
+        <div class="option-grid">
+          <div class="option-card selected" onclick="selectOne(this,'freq')">
+            <div class="opt-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="opt-text">
+              <h4>Semanal</h4>
+              <p>Una sesión por semana</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOne(this,'freq')">
+            <div class="opt-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="opt-text">
+              <h4>Quincenal</h4>
+              <p>Cada dos semanas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Disponibilidad horaria</label>
+        <div class="chips" id="chips-hora">
+          <span class="chip" onclick="toggleChip(this)">Mañana (8–12 hs)</span>
+          <span class="chip" onclick="toggleChip(this)">Mediodía (12–15 hs)</span>
+          <span class="chip" onclick="toggleChip(this)">Tarde (15–19 hs)</span>
+          <span class="chip" onclick="toggleChip(this)">Noche (19–22 hs)</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Preferencia de género del psicólogo (opcional)</label>
+        <select>
+          <option value="">Sin preferencia</option>
+          <option>Mujer</option>
+          <option>Hombre</option>
+          <option>No binario / Indistinto</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Corriente psicológica (opcional)</label>
+        <select>
+          <option value="">Sin preferencia</option>
+          <option>Psicoanálisis</option>
+          <option>Cognitivo-Conductual</option>
+          <option>Sistémica</option>
+          <option>Gestalt</option>
+          <option>Integrativa</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver
+        </button>
+        <button class="btn-primary" onclick="goStep(4)">
+          Enviar solicitud
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 4: CONFIRMACIÓN -->
+    <div class="step-panel" id="p4">
+      <div class="confirm-wrap">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>¡Solicitud enviada!</h3>
+        <p>Recibimos tu información. En menos de <strong>24 horas</strong> nuestro equipo de coordinación te va a contactar para presentarte tu psicólogo asignado.</p>
+
+        <div class="confirm-card">
+          <div class="confirm-row">
+            <span>Nombre</span>
+            <span id="conf-nombre">—</span>
+          </div>
+          <div class="confirm-row">
+            <span>Email</span>
+            <span id="conf-email">—</span>
+          </div>
+          <div class="confirm-row">
+            <span>Modalidad</span>
+            <span>Online</span>
+          </div>
+          <div class="confirm-row">
+            <span>Frecuencia</span>
+            <span>Semanal</span>
+          </div>
+        </div>
+
+        <div class="confirm-next">
+          <strong>¿Qué pasa ahora?</strong>
+          Nuestro coordinador va a revisar tu perfil y te va a asignar el psicólogo más adecuado. Te escribimos por email y WhatsApp para presentarte y coordinar la primera sesión.
+        </div>
+
+        <a href="entretiempo-psi.html" class="btn-primary" style="display:inline-flex;margin:0 auto;">
+          Volver al inicio
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /right -->
+</div><!-- /page -->
+
+<script>
+let currentStep = 1;
+const progresses = ['25%','50%','75%','100%'];
+
+function goStep(step) {
+  // Validar paso 1
+  if (step === 2 && currentStep === 1) {
+    const nombre = document.getElementById('nombre').value.trim();
+    const email  = document.getElementById('email').value.trim();
+    if (!nombre || !email) {
+      if (!nombre) document.getElementById('nombre').style.borderColor = 'var(--red)';
+      if (!email)  document.getElementById('email').style.borderColor  = 'var(--red)';
+      return;
+    }
+  }
+
+  // Guardar datos para confirmación
+  if (step === 4) {
+    const n = document.getElementById('nombre').value;
+    const a = document.getElementById('apellido').value;
+    const e = document.getElementById('email').value;
+    document.getElementById('conf-nombre').textContent = (n + ' ' + a).trim() || '—';
+    document.getElementById('conf-email').textContent  = e || '—';
+  }
+
+  document.getElementById('p' + currentStep).classList.remove('active');
+  currentStep = step;
+  document.getElementById('p' + currentStep).classList.add('active');
+  document.getElementById('progress').style.width = progresses[step - 1];
+  updateStepper(step);
+  document.querySelector('.right').scrollTop = 0;
+}
+
+function updateStepper(step) {
+  for (let i = 1; i <= 4; i++) {
+    const sc = document.getElementById('sc' + i);
+    const sl = document.getElementById('sl' + i);
+    const line = document.getElementById('line' + i);
+    sc.className = 'st-circle' + (i < step ? ' done' : i === step ? ' active' : '');
+    sl.className = 'st-label'  + (i === step ? ' active' : '');
+    if (i < step) sc.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    else sc.textContent = i;
+    if (line) line.className = 'st-line' + (i < step ? ' done' : '');
+  }
+}
+
+function toggleChip(el) {
+  el.classList.toggle('selected');
+}
+
+function selectOne(el, group) {
+  el.closest('.option-grid, .option-grid-3').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Limpiar error al tipear
+['nombre','apellido','email'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => el.style.borderColor = '');
+});
+</script>
+<script src="entretiempo-sheets.js"></script>
+</body>
+</html>

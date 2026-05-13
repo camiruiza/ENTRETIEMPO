@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Únete al equipo · Entretiempo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#FAF6F0;--cream2:#F2EBE0;--cream3:#E8DDD0;--cream4:#D9CCBA;
+  --sage:#8A9E6A;--sage-d:#6B7D50;--sage-dd:#4E5D39;--sage-l:#C8D9B0;--sage-xl:#EAF0E0;
+  --gold:#C8922A;--gold-l:#F5E6C8;--gold-d:#9A6E1A;
+  --brown:#3D2E1E;--brown-m:#7A6248;--brown-l:#B8A090;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--brown);line-height:1.7;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:400;line-height:1.25;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(250,246,240,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--cream3);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);}
+.logo em{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:1.75rem;}
+.nav-links a{font-size:14px;color:var(--brown-m);transition:color .2s;}
+.nav-links a:hover{color:var(--sage-d);}
+.btn-nav{padding:9px 22px;background:var(--sage);color:#fff;border-radius:30px;font-size:13px;font-weight:500;transition:background .2s;}
+.btn-nav:hover{background:var(--sage-d);}
+
+/* HERO */
+.hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:5rem 5%;gap:4rem;position:relative;overflow:hidden;}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;}
+.hero-orb1{width:600px;height:600px;top:-150px;right:-150px;background:radial-gradient(circle,var(--sage-xl),transparent 65%);}
+.hero-orb2{width:300px;height:300px;bottom:-80px;left:0;background:radial-gradient(circle,var(--gold-l),transparent 65%);}
+.hero-left{position:relative;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--sage-xl);border:1px solid var(--sage-l);border-radius:30px;padding:5px 16px;font-size:12px;color:var(--sage-d);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;}
+.eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--sage);}
+.hero h1{font-size:clamp(2.6rem,4.5vw,4rem);color:var(--brown);margin-bottom:1.25rem;}
+.hero h1 em{color:var(--sage-d);font-style:italic;}
+.hero-sub{font-size:17px;color:var(--brown-m);max-width:460px;margin-bottom:2.5rem;line-height:1.85;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--sage);color:#fff;border-radius:30px;font-size:15px;font-weight:500;transition:all .25s;box-shadow:0 4px 20px rgba(138,158,106,.3);}
+.btn-primary:hover{background:var(--sage-d);transform:translateY(-2px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border:1.5px solid var(--cream3);color:var(--brown-m);border-radius:30px;font-size:15px;transition:all .25s;}
+.btn-outline:hover{border-color:var(--sage-l);color:var(--sage-d);}
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--cream3);}
+.stat .num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--brown);}
+.stat .lbl{font-size:13px;color:var(--brown-l);}
+
+/* HERO RIGHT — TESTIMONIAL STACK */
+.hero-right{position:relative;z-index:1;}
+.psi-stack{display:flex;flex-direction:column;gap:14px;}
+.psi-card{background:var(--cream);border:1px solid var(--cream3);border-radius:20px;padding:1.25rem 1.5rem;transition:transform .25s;}
+.psi-card:hover{transform:translateX(-6px);}
+.psi-card.featured{background:var(--sage-xl);border-color:var(--sage-l);}
+.psi-card-top{display:flex;align-items:center;gap:12px;margin-bottom:.75rem;}
+.psi-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0;}
+.av-s{background:var(--sage-xl);color:var(--sage-d);}
+.av-g{background:var(--gold-l);color:var(--gold-d);}
+.av-c{background:var(--cream2);color:var(--brown-m);}
+.psi-card h4{font-size:14px;font-weight:500;color:var(--brown);font-family:'DM Sans',sans-serif;margin-bottom:2px;}
+.psi-card .psi-sub{font-size:12px;color:var(--brown-l);}
+.psi-quote{font-size:13px;color:var(--brown-m);line-height:1.65;font-style:italic;}
+.psi-card.featured .psi-quote{color:var(--sage-d);}
+.badge-sm{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:var(--cream2);color:var(--brown-m);margin-top:.625rem;}
+.badge-sm.active{background:var(--sage-xl);color:var(--sage-d);}
+
+/* SECTIONS */
+section{padding:5rem 5%;}
+.inner{max-width:1060px;margin:0 auto;}
+.sec-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-d);margin-bottom:1rem;}
+.sec-tag::before{content:'';width:20px;height:1px;background:var(--sage);}
+.sec-title{font-size:clamp(1.8rem,3vw,2.5rem);color:var(--brown);margin-bottom:.75rem;}
+.sec-sub{font-size:16px;color:var(--brown-m);max-width:520px;line-height:1.8;}
+
+/* BENEFICIOS */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:2.5rem;}
+.benefit-card{background:var(--cream);border:1px solid var(--cream3);border-radius:20px;padding:1.75rem;transition:all .25s;}
+.benefit-card:hover{border-color:var(--sage-l);transform:translateY(-4px);box-shadow:0 12px 32px rgba(61,46,30,.07);}
+.benefit-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:1.25rem;}
+.bi-sage{background:var(--sage-xl);}
+.bi-gold{background:var(--gold-l);}
+.bi-cream{background:var(--cream2);}
+.benefit-card h3{font-size:1.1rem;color:var(--brown);margin-bottom:.5rem;}
+.benefit-card p{font-size:14px;color:var(--brown-m);line-height:1.7;}
+
+/* REQUISITOS */
+.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:2.5rem;}
+.req-col h3{font-size:1.1rem;color:var(--brown);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--cream3);}
+.req-list{list-style:none;display:flex;flex-direction:column;gap:.875rem;}
+.req-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--brown-m);line-height:1.6;}
+.req-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;}
+.rd-sage{background:var(--sage-xl);color:var(--sage-d);}
+.rd-red{background:#FDECEA;color:#C0392B;}
+
+/* PROCESO */
+.proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2.5rem;position:relative;}
+.proceso-steps::before{content:'';position:absolute;top:28px;left:calc(12.5%);right:calc(12.5%);height:2px;background:linear-gradient(90deg,var(--sage-l),var(--cream3));z-index:0;}
+.paso{text-align:center;position:relative;z-index:1;padding:0 .5rem;}
+.paso-num{width:56px;height:56px;border-radius:50%;background:var(--cream);border:2px solid var(--sage-l);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--sage-d);margin:0 auto 1rem;}
+.paso h4{font-size:13px;font-weight:500;color:var(--brown);margin-bottom:.375rem;font-family:'DM Sans',sans-serif;}
+.paso p{font-size:12px;color:var(--brown-m);line-height:1.5;}
+.paso-time{display:inline-block;background:var(--cream2);border:1px solid var(--cream3);border-radius:20px;padding:2px 10px;font-size:11px;color:var(--brown-l);margin-top:.5rem;}
+
+/* VALORES */
+.valores-wrap{background:var(--brown);border-radius:24px;padding:3rem;color:var(--cream);position:relative;overflow:hidden;margin-top:2.5rem;}
+.valores-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(138,158,106,.15),transparent 65%);}
+.valores-wrap h3{font-size:1.6rem;margin-bottom:.5rem;color:var(--cream);}
+.valores-wrap .sub{font-size:15px;color:var(--brown-l);margin-bottom:2rem;}
+.valores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative;}
+.valor-item{background:rgba(250,246,240,.06);border:1px solid rgba(250,246,240,.1);border-radius:14px;padding:1.25rem;}
+.valor-item .v-icon{font-size:24px;margin-bottom:.75rem;}
+.valor-item h4{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:.375rem;font-family:'DM Sans',sans-serif;}
+.valor-item p{font-size:13px;color:var(--brown-l);line-height:1.6;}
+
+/* FORM */
+.form-wrap{display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;}
+.form-intro h2{font-size:2rem;margin-bottom:.75rem;}
+.form-intro p{font-size:15px;color:var(--brown-m);line-height:1.8;margin-bottom:1.5rem;}
+.form-trust{display:flex;flex-direction:column;gap:10px;}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--brown-m);}
+.trust-icon{width:34px;height:34px;border-radius:10px;background:var(--sage-xl);border:1px solid var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.form-card{background:var(--cream);border:1px solid var(--cream3);border-radius:24px;padding:2rem;box-shadow:0 8px 40px rgba(61,46,30,.07);}
+.form-card h3{font-size:1.3rem;color:var(--brown);margin-bottom:.375rem;}
+.form-card .form-sub{font-size:13px;color:var(--brown-m);margin-bottom:1.5rem;}
+.f{margin-bottom:1.1rem;}
+.f:last-of-type{margin-bottom:0;}
+.fl{display:block;font-size:12px;font-weight:500;color:var(--brown-m);margin-bottom:5px;letter-spacing:.02em;}
+.ft{font-size:11px;color:var(--brown-l);display:block;margin-bottom:5px;font-style:italic;}
+.fi,.fs,.fta{width:100%;padding:10px 14px;border:1.5px solid var(--cream3);border-radius:12px;font-size:13px;background:var(--cream);color:var(--brown);font-family:'DM Sans',sans-serif;transition:border-color .2s;}
+.fi:focus,.fs:focus,.fta:focus{outline:none;border-color:var(--sage-l);box-shadow:0 0 0 3px rgba(138,158,106,.1);}
+.fi::placeholder,.fta::placeholder{color:var(--brown-l);font-style:italic;}
+.fta{height:90px;resize:vertical;}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.chip{padding:5px 12px;border:1.5px solid var(--cream3);border-radius:20px;font-size:12px;color:var(--brown-m);cursor:pointer;transition:all .2s;background:var(--cream);}
+.chip:hover{border-color:var(--sage-l);color:var(--sage-d);}
+.chip.sel{background:var(--sage);color:#fff;border-color:var(--sage);}
+.submit-btn{width:100%;padding:14px;background:var(--sage);color:#fff;border:none;border-radius:30px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;margin-top:1.25rem;box-shadow:0 4px 16px rgba(138,158,106,.25);}
+.submit-btn:hover{background:var(--sage-d);transform:translateY(-1px);}
+.form-note{font-size:12px;color:var(--brown-l);text-align:center;margin-top:.75rem;line-height:1.5;}
+.divider{border:none;border-top:1px solid var(--cream3);margin:1.25rem 0;}
+
+/* SUCCESS */
+.success-screen{display:none;text-align:center;padding:1rem 0;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:var(--sage-xl);border:2px solid var(--sage-l);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:30px;}
+.success-screen h3{font-size:1.5rem;color:var(--brown);margin-bottom:.5rem;}
+.success-screen p{font-size:14px;color:var(--brown-m);line-height:1.75;}
+
+/* ANIMATE */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{background:var(--brown);border-top:1px solid rgba(255,255,255,.07);padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:13px;color:var(--brown-l);}
+.footer-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);}
+.footer-logo em{color:var(--gold);font-style:normal;}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:3rem;}
+  .hero-right{display:none;}
+  .benefits-grid{grid-template-columns:1fr 1fr;}
+  .req-grid{grid-template-columns:1fr;}
+  .proceso-steps{grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .proceso-steps::before{display:none;}
+  .valores-grid{grid-template-columns:1fr 1fr;}
+  .form-wrap{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+}
+@media(max-width:560px){
+  .benefits-grid{grid-template-columns:1fr;}
+  .valores-grid{grid-template-columns:1fr;}
+  .fr2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="entretiempo-psi.html" class="logo">entre<em>tiempo</em></a>
+  <div class="nav-links">
+    <a href="entretiempo-psi.html">Inicio</a>
+    <a href="entretiempo-como-funciona.html">¿Cómo funciona?</a>
+    <a href="#">Precios</a>
+    <a href="#postulate" class="btn-nav">Postularme</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb hero-orb1"></div>
+  <div class="hero-orb hero-orb2"></div>
+  <div class="hero-left">
+    <div class="eyebrow"><span></span>Para psicólogos y psicólogas</div>
+    <h1>Hacé lo que<br>más te gusta.<br><em>Nosotros el resto.</em></h1>
+    <p class="hero-sub">En Entretiempo te conectamos con pacientes, gestionamos los pagos y coordinamos tu agenda. Vos solo tenés que hacer terapia.</p>
+    <div class="hero-btns">
+      <a href="#postulate" class="btn-primary">Quiero postularme</a>
+      <a href="entretiempo-como-funciona.html" class="btn-outline">¿Cómo funciona?</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">+15</div><div class="lbl">Profesionales activos</div></div>
+      <div class="stat"><div class="num">5</div><div class="lbl">Países de atención</div></div>
+      <div class="stat"><div class="num">+500</div><div class="lbl">Sesiones realizadas</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="psi-stack">
+      <div class="psi-card featured">
+        <div class="psi-card-top">
+          <div class="psi-av av-s">MG</div>
+          <div>
+            <h4>Lic. María González</h4>
+            <div class="psi-sub">Psicoanálisis · Buenos Aires</div>
+          </div>
+        </div>
+        <div class="psi-quote">"Desde que entré a Entretiempo dejé de pensar en conseguir pacientes. Me llegan, coordinan y pagan. Yo solo me concentro en el trabajo clínico."</div>
+        <div class="badge-sm active">● Activa desde 2023</div>
+      </div>
+      <div class="psi-card">
+        <div class="psi-card-top">
+          <div class="psi-av av-g">JL</div>
+          <div>
+            <h4>Lic. Julián López</h4>
+            <div class="psi-sub">Cognitivo-Conductual · Rosario</div>
+          </div>
+        </div>
+        <div class="psi-quote">"Lo mejor es la supervisión. Es un espacio que no tenía antes y que mejoró muchísimo mi práctica."</div>
+        <div class="badge-sm active">● Activo desde 2024</div>
+      </div>
+      <div class="psi-card">
+        <div class="psi-card-top">
+          <div class="psi-av av-c">SR</div>
+          <div>
+            <h4>Lic. Sandra Ruiz</h4>
+            <div class="psi-sub">Sistémica · CABA · Atiende en inglés</div>
+          </div>
+        </div>
+        <div class="psi-quote">"Gracias a la sección de idiomas recibo pacientes de Estados Unidos e Israel. Nunca lo hubiera imaginado antes."</div>
+        <div class="badge-sm active">● Activa desde 2024</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BENEFICIOS -->
+<section style="background:var(--cream2);border-top:1px solid var(--cream3);border-bottom:1px solid var(--cream3);">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">Por qué Entretiempo</div>
+      <h2 class="sec-title">Todo lo que ganás siendo parte</h2>
+      <p class="sec-sub">Para que puedas focalizarte en el trabajo clínico y dejar la gestión en nuestras manos.</p>
+    </div>
+    <div class="benefits-grid reveal">
+      <div class="benefit-card">
+        <div class="benefit-icon bi-sage">🧭</div>
+        <h3>Pacientes que llegan solos</h3>
+        <p>No tenés que hacer marketing ni estar en redes. Nuestro equipo coordinador asigna pacientes según tu especialidad y disponibilidad.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon bi-gold">💳</div>
+        <h3>Cobro automático</h3>
+        <p>El paciente paga al reservar. Vos recibís el pago automáticamente tras cada sesión confirmada, sin perseguir cobros ni gestionar transferencias.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon bi-sage">📅</div>
+        <h3>Agenda digital integrada</h3>
+        <p>Gestionás tu disponibilidad desde tu panel. Los pacientes reservan en los horarios que vos habilitás. Sin llamadas ni WhatsApps para coordinar.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon bi-cream">🎥</div>
+        <h3>Videollamada dentro de la plataforma</h3>
+        <p>No necesitás Zoom ni Meet. Las sesiones online ocurren dentro de Entretiempo, en una sala privada y segura, con un solo clic.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon bi-sage">👥</div>
+        <h3>Supervisión clínica</h3>
+        <p>Accedés a espacios de supervisión de casos con otros profesionales del equipo. Un recurso que enriquece tu práctica y tu desarrollo profesional.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon bi-gold">🌍</div>
+        <h3>Pacientes de todo el mundo</h3>
+        <p>Si atendés en otro idioma o estás dispuesto/a a adaptar tus horarios, podés recibir pacientes de España, México, Estados Unidos, Israel y más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section>
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">Requisitos</div>
+      <h2 class="sec-title">¿Quién puede sumarse?</h2>
+      <p class="sec-sub">Buscamos profesionales comprometidos con la calidad del acompañamiento terapéutico.</p>
+    </div>
+    <div class="req-grid reveal">
+      <div>
+        <h3>✓ Lo que necesitás tener</h3>
+        <ul class="req-list">
+          <li><div class="req-dot rd-sage">✓</div>Título de Licenciado/a en Psicología (grado universitario)</li>
+          <li><div class="req-dot rd-sage">✓</div>Matrícula profesional vigente (provincial o nacional)</li>
+          <li><div class="req-dot rd-sage">✓</div>Al menos 1 año de experiencia clínica atendiendo pacientes</li>
+          <li><div class="req-dot rd-sage">✓</div>Conexión a internet estable y cámara web para sesiones online</li>
+          <li><div class="req-dot rd-sage">✓</div>Disponibilidad mínima de 5 franjas horarias semanales</li>
+          <li><div class="req-dot rd-sage">✓</div>Compromiso con los valores y ética de la comunidad Entretiempo</li>
+        </ul>
+      </div>
+      <div>
+        <h3>✗ Lo que no es excluyente</h3>
+        <ul class="req-list">
+          <li><div class="req-dot rd-red">✗</div>No es necesario tener experiencia previa en atención online</li>
+          <li><div class="req-dot rd-red">✗</div>No tenés que ser de Buenos Aires ni de Argentina</li>
+          <li><div class="req-dot rd-red">✗</div>No hace falta hablar otro idioma (aunque suma)</li>
+          <li><div class="req-dot rd-red">✗</div>No necesitás tener consultorio propio si solo atendés online</li>
+          <li><div class="req-dot rd-red">✗</div>No necesitás dejar de atender pacientes propios en paralelo</li>
+          <li><div class="req-dot rd-red">✗</div>No hace falta tener posgrado o especialización (aunque valoramos la formación continua)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section style="background:var(--cream2);border-top:1px solid var(--cream3);border-bottom:1px solid var(--cream3);">
+  <div class="inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="sec-tag" style="justify-content:center;">El proceso</div>
+      <h2 class="sec-title">¿Cómo es la incorporación?</h2>
+      <p class="sec-sub" style="margin:0 auto;">Simple y con acompañamiento en cada paso.</p>
+    </div>
+    <div class="proceso-steps reveal">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <h4>Completás la postulación</h4>
+        <p>Llenás el formulario de esta página con tus datos y motivaciones</p>
+        <span class="paso-time">10 minutos</span>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <h4>Revisamos tu postulación</h4>
+        <p>El equipo verifica tu matrícula y lee tu perfil con atención</p>
+        <span class="paso-time">3 a 7 días hábiles</span>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <h4>Entrevista de incorporación</h4>
+        <p>Una conversación breve para conocerte y contarte cómo funciona todo</p>
+        <span class="paso-time">30 minutos · online</span>
+      </div>
+      <div class="paso">
+        <div class="paso-num">4</div>
+        <h4>Tu perfil se activa</h4>
+        <p>Completás tu perfil profesional y comenzás a recibir pacientes asignados</p>
+        <span class="paso-time">¡Listo para empezar!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section>
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">Nuestra cultura</div>
+      <h2 class="sec-title">Los valores que nos mueven</h2>
+      <p class="sec-sub">Entretiempo no es solo una plataforma. Es una comunidad con una forma de hacer terapia.</p>
+    </div>
+    <div class="valores-wrap reveal">
+      <h3>Lo que nos importa</h3>
+      <p class="sub">Los valores que guían cada decisión dentro de la comunidad.</p>
+      <div class="valores-grid">
+        <div class="valor-item">
+          <div class="v-icon">🤝</div>
+          <h4>Cuidado genuino</h4>
+          <p>Creemos que la terapia transforma vidas. Eso exige presencia real, no atención mecánica.</p>
+        </div>
+        <div class="valor-item">
+          <div class="v-icon">🔒</div>
+          <h4>Confidencialidad total</h4>
+          <p>Lo que ocurre en sesión queda en sesión. Siempre, sin excepciones.</p>
+        </div>
+        <div class="valor-item">
+          <div class="v-icon">📚</div>
+          <h4>Formación continua</h4>
+          <p>Valoramos a los profesionales que siguen aprendiendo, supervisando y cuestionando su práctica.</p>
+        </div>
+        <div class="valor-item">
+          <div class="v-icon">🌱</div>
+          <h4>Acceso y diversidad</h4>
+          <p>Queremos que la terapia llegue a más personas, desde más lugares y en más idiomas.</p>
+        </div>
+        <div class="valor-item">
+          <div class="v-icon">⚖️</div>
+          <h4>Ética profesional</h4>
+          <p>Adherimos al código de ética de la profesión. Sin excepciones ni zonas grises.</p>
+        </div>
+        <div class="valor-item">
+          <div class="v-icon">💬</div>
+          <h4>Comunicación abierta</h4>
+          <p>Con el equipo coordinador, con los pacientes y entre profesionales. Sin burocracia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section id="postulate" style="background:var(--cream2);border-top:1px solid var(--cream3);">
+  <div class="inner">
+    <div class="form-wrap">
+      <div class="form-intro reveal">
+        <div class="sec-tag">Postulación</div>
+        <h2 class="sec-title">¿Querés sumarte?</h2>
+        <p>Completá el formulario y el equipo de Entretiempo se contacta con vos en los próximos días hábiles para contarte los detalles y coordinar la entrevista de incorporación.</p>
+        <div class="form-trust" style="margin-top:2rem;">
+          <div class="trust-item"><div class="trust-icon">🔒</div>Tus datos son confidenciales y solo los usa el equipo de coordinación</div>
+          <div class="trust-item"><div class="trust-icon">📅</div>Te respondemos en 3 a 7 días hábiles</div>
+          <div class="trust-item"><div class="trust-icon">✅</div>Sin compromiso — la entrevista es informativa y sin presión</div>
+          <div class="trust-item"><div class="trust-icon">🌍</div>Aceptamos profesionales de toda Latinoamérica y España</div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h3>Formulario de postulación</h3>
+        <p class="form-sub">Tardás menos de 10 minutos en completarlo.</p>
+
+        <div id="form-content">
+          <div class="fr2">
+            <div class="f"><label class="fl">Nombre *</label><input class="fi" type="text" placeholder="Tu nombre"/></div>
+            <div class="f"><label class="fl">Apellido *</label><input class="fi" type="text" placeholder="Tu apellido"/></div>
+          </div>
+          <div class="f"><label class="fl">Email profesional *</label><input class="fi" type="email" placeholder="tu@email.com"/></div>
+          <div class="f"><label class="fl">WhatsApp / Teléfono *</label><input class="fi" type="tel" placeholder="+54 9 11 ..."/></div>
+          <div class="fr2">
+            <div class="f">
+              <label class="fl">País donde residís *</label>
+              <select class="fs">
+                <option value="">Seleccioná</option>
+                <option>Argentina</option>
+                <option>Uruguay</option>
+                <option>Chile</option>
+                <option>México</option>
+                <option>Colombia</option>
+                <option>España</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="f">
+              <label class="fl">Ciudad *</label>
+              <input class="fi" type="text" placeholder="Ej: Buenos Aires"/>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="f">
+            <label class="fl">Número de matrícula *</label>
+            <span class="ft">MP (provincial) o MN (nacional)</span>
+            <input class="fi" type="text" placeholder="Ej: MP 12345"/>
+          </div>
+          <div class="f">
+            <label class="fl">Corriente psicológica principal *</label>
+            <select class="fs">
+              <option value="">Seleccioná</option>
+              <option>Psicoanálisis</option>
+              <option>Cognitivo-Conductual (TCC)</option>
+              <option>Sistémica</option>
+              <option>Gestalt</option>
+              <option>Integrativa</option>
+              <option>Humanista</option>
+              <option>EMDR</option>
+              <option>Otra</option>
+            </select>
+          </div>
+          <div class="fr2">
+            <div class="f">
+              <label class="fl">Años de experiencia clínica *</label>
+              <input class="fi" type="number" placeholder="Ej: 5" min="0"/>
+            </div>
+            <div class="f">
+              <label class="fl">Modalidad de atención *</label>
+              <select class="fs">
+                <option value="">Seleccioná</option>
+                <option>Solo online</option>
+                <option>Solo presencial</option>
+                <option>Ambas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="f">
+            <label class="fl">Áreas en las que trabajás</label>
+            <div class="chips">
+              <span class="chip" onclick="this.classList.toggle('sel')">Ansiedad</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Depresión</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Autoestima</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Vínculos</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Duelo</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Trauma</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Adolescencia</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Infancia</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Pareja</span>
+              <span class="chip" onclick="this.classList.toggle('sel')">Otro</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="f">
+            <label class="fl">¿Por qué querés sumarte a Entretiempo?</label>
+            <span class="ft">Contanos brevemente tu motivación. Esto nos ayuda a conocerte mejor.</span>
+            <textarea class="fta" placeholder="Ej: Busco una plataforma que me permita focalizarme en el trabajo clínico sin tener que gestionar la parte administrativa..."></textarea>
+          </div>
+
+          <div class="f">
+            <label class="fl">¿Cómo nos conociste?</label>
+            <select class="fs">
+              <option value="">Seleccioná</option>
+              <option>Instagram</option>
+              <option>Recomendación de un colega</option>
+              <option>Google</option>
+              <option>LinkedIn</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <button class="submit-btn" onclick="submitForm()">Enviar postulación</button>
+          <p class="form-note">Al enviar aceptás que el equipo de Entretiempo se contacte con vos por email o WhatsApp para dar seguimiento a tu postulación.</p>
+        </div>
+
+        <div class="success-screen" id="success-screen">
+          <div class="success-icon">🌿</div>
+          <h3>¡Postulación recibida!</h3>
+          <p>Gracias por querer ser parte de Entretiempo. El equipo revisará tu postulación y te contactaremos en los próximos <strong>3 a 7 días hábiles</strong> por email o WhatsApp para coordinar la entrevista de incorporación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">entre<em>tiempo</em></span>
+  <span>© 2026 Entretiempo · info@entretiempo.psi</span>
+</footer>
+
+<script>
+function submitForm(){
+  document.getElementById('form-content').style.display='none';
+  document.getElementById('success-screen').style.display='block';
+  window.scrollTo({top:document.getElementById('postulate').offsetTop,behavior:'smooth'});
+}
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.boxShadow=window.scrollY>20?'0 2px 20px rgba(61,46,30,.06)':'';
+});
+</script>
+<script src="entretiempo-sheets.js"></script>
+</body>
+</html>
